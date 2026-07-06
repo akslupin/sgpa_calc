@@ -95,6 +95,7 @@
             <option value="Semester 3">Semester 3</option>
             <option value="Semester 4">Semester 4</option>
             <option value="Semester 5">Semester 5</option>
+            <option value="Semester 6">Semester 6</option>
         </select> </div>
         <button id="loadbtn" onclick="loadSubjects()"> Load Subjects </button>
         <div id="subjects"> </div>
@@ -126,7 +127,10 @@
         lab: ["NS","PYTHON Lab","SE Lab"]},
         "Semester 5": {
         theory: ["ASP.NET","UNIX","OOSD","SQT","DM"],
-        lab: ["ASP.NET Lab","UNIX Lab","OOSD Lab"] }
+        lab: ["ASP.NET Lab","UNIX Lab","OOSD Lab"] },
+        "Semester 6": {
+        theory: ["IS","ADV JAVA","ML"],
+        lab:["ADV JAVA", "PROJECT"] }
         }
     function loadSubjects(){
         document.getElementById("result").innerText = "";
@@ -155,7 +159,28 @@
       });
     }
     function calculateGPA(){
+        const selected_sem = document.getElementById("semesters");
+        const choice = selected_sem.value;
         const allDropDowns = document.querySelectorAll(".grade-input");
+        if (choice == "Semester 6") {
+            let total = 0;
+            allDropDowns.forEach((dropdown, index) => {
+            let grade = dropdown.value;
+            let points = gradepoint[grade];
+            if (index <= 2 ) {
+                total += points * 4;
+            }
+            if (index == 3 ) {
+                total += points * 2
+            }
+            if (index == 4 ) {
+                total += points * 7;
+            }
+        });
+            let gpa = total/21;
+            document.getElementById("result").innerText = gpa.toFixed(2);
+        }
+        else {
         let total = 0;
         allDropDowns.forEach((dropdown, index) => {
             let grade = dropdown.value;
@@ -169,7 +194,8 @@
         });
             let gpa = total/26;
             document.getElementById("result").innerText = gpa.toFixed(2);
-        }
+        } 
+    }
     function resetAll(){
         document.getElementById("subjects").innerHTML = "";
         document.getElementById("result").innerText = "";
