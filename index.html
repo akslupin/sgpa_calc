@@ -35,7 +35,7 @@
                 align-items: center ;
                 border-radius:  5px;
                 }
-            #loadbtn, #calcbtn { 
+            #calcbtn { 
                 background-color: #2f4f8c;
                 width: 210px;
                 border-radius: 8px;
@@ -73,7 +73,7 @@
                 font-weight: bold;
                 color: #fbebbc;
             }
-            #loadbtn:hover, #calcbtn:hover , select:hover{
+            #calcbtn:hover , select:hover{
             background-color: #233a67; 
             }
             p { 
@@ -88,7 +88,7 @@
     </head>
 <body class="content">
     <div class="custom-select">
-    <select id="semesters">
+    <select id="semesters" onchange="loadSubjects()">
         <option value="">Select semester:</option>
             <option value="Semester 1">Semester 1</option>
             <option value="Semester 2">Semester 2</option>
@@ -97,9 +97,8 @@
             <option value="Semester 5">Semester 5</option>
             <option value="Semester 6">Semester 6</option>
         </select> </div>
-        <button id="loadbtn" onclick="loadSubjects()"> Load Subjects </button>
         <div id="subjects"> </div>
-        <button id="calcbtn" onclick="calculateGPA()"> Calculate GPA </button>
+        <button id="calcbtn" onclick="calculateGPA()"> Calculate SGPA </button>
         <p id="result"></p>
         <button id="rstbtn" onclick="resetAll()"> Reset </button>
         <script>
@@ -130,7 +129,7 @@
         lab: ["ASP.NET Lab","UNIX Lab","OOSD Lab"] },
         "Semester 6": {
         theory: ["IS","ADV JAVA","ML"],
-        lab:["ADV JAVA", "PROJECT"] }
+        lab:["ADV JAVA Lab", "PROJECT"] }
         }
     function loadSubjects(){
         document.getElementById("result").innerText = "";
